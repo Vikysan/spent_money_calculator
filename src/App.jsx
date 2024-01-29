@@ -13,7 +13,7 @@ const dummy = [{
   cost:500,
   description:"lidl"
 },{
-  cost:500,
+  cost:5000,
   description:"lidl"
 },{
   cost:500,
@@ -31,7 +31,7 @@ const dummy = [{
   cost:500,
   description:"lidl"
 },{
-  cost:500,
+  cost:5000,
   description:"lidl"
 },{
   cost:500,
@@ -43,7 +43,13 @@ const dummy = [{
   cost:500,
   description:"lidl"
 },{
+  cost:5000,
+  description:"lidl"
+},{
   cost:500,
+  description:"lidl"
+},{
+  cost:5000,
   description:"lidl"
 },{
   cost:500,
@@ -55,13 +61,7 @@ const dummy = [{
   cost:500,
   description:"lidl"
 },{
-  cost:500,
-  description:"lidl"
-},{
-  cost:500,
-  description:"lidl"
-},{
-  cost:500,
+  cost:5000,
   description:"lidl"
 },{
   cost:500,
@@ -72,7 +72,7 @@ const dummy = [{
 
 function App() {
 
-  const [expenses,setExpenses] = useState(dummy)
+  const [expenses,setExpenses] = useState([])
   const [sumExpenses,setSumExpenses] = useState(0)
 
   useEffect(()=>{

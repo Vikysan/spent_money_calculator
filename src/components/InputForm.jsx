@@ -5,19 +5,22 @@ const InputForm = ({ addExpense }) => {
   const textInputRef = useRef();
   const getNewExpense = () => {
     const newExpense = {
-      cost: parseInt(numberInputRef.current.value),
-      description: textInputRef.current.value,
+      cost: parseInt(numberInputRef.current.value.trim()),
+      description: textInputRef.current.value.trim(),
       date: new Date(),
     };
-    addExpense(newExpense);
+    if (newExpense.cost !== "" && newExpense.description !== "") {
+      addExpense(newExpense);
+    }
   };
 
   useEffect(() => {
     document.getElementById("costs").value = "";
     document.getElementById("description").value = "";
   });
+
   return (
-    <div className="w-full  flex space-x-2 justify-between border border-[#161f3b] p-5">
+    <div className="w-full  flex space-x-2 justify-between border-t-2 border-[#161f3b] p-5">
       <div className="">
         {/* <label htmlFor="costs">částka</label> */}
         <input
