@@ -77,7 +77,7 @@ function App() {
 
   useEffect(()=>{
    const localData =  JSON.parse(localStorage.getItem('user'));
-   if(localData.length){
+   if(!!localData.length){
     
     setExpenses(localData)
    }
