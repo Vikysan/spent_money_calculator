@@ -9,7 +9,7 @@ export default defineConfig(({ command }) => {
   }
 
   if (command !== 'serve') {
-    config.base = '"/spent_money_calculator/"'
+    config.base = '/spent_money_calculator/'
   }
 
   return config
