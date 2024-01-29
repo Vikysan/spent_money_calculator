@@ -1,16 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+
+import Table from "./components/Table";
+import InputForm from "./components/InputForm";
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const [expenses,setExpenses] = useState([{
+    cost:500,
+    description:"lidl"
+  }])
+  const addExpense = (newExpends)=>{
+    setExpenses(prevExpenses=>[newExpends,...prevExpenses])
+  }
+
+  const removeExpense = (id) =>{
+    setExpenses(prevExpenses=>prevExpenses.filter((_,index)=>index!==id))
+  }
+ 
   return (
-    <h1 className="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-  )
+    <main className="bg-blue-300 w-screen min-h-screen  ">
+      <div className="w-96 flex flex-col  items-center justify-center">
+
+     <Table expenses={expenses} removeExpense={removeExpense}/>
+     <InputForm addExpense={addExpense}/>
+      </div>
+    </main>
+  );
 }
 
-export default App
+export default App; 
