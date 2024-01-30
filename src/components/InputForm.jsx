@@ -1,48 +1,55 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import Select from "./Select";
 
 const InputForm = ({ addExpense }) => {
   const numberInputRef = useRef();
   const textInputRef = useRef();
+  const [selectedType, setSelectedType] = useState("Ostatní");
+
   const getNewExpense = () => {
     const newExpense = {
       cost: parseInt(numberInputRef.current.value.trim()),
       description: textInputRef.current.value.trim(),
+      type: selectedType,
       date: new Date(),
     };
-    if (newExpense.cost !== "" && newExpense.description !== "") {
+    console.log(newExpense);
+    if (newExpense.cost !== "") {
       addExpense(newExpense);
     }
-  };
-
-  useEffect(() => {
     document.getElementById("costs").value = "";
     document.getElementById("description").value = "";
-  });
+  };
+
+  const selectTypeHandle = (e) => {
+    setSelectedType(e.target.value);
+  };
 
   return (
-    <div className="w-full  flex space-x-2 justify-between border-t-2 border-[#161f3b] p-5">
-      <div className="">
-        {/* <label htmlFor="costs">částka</label> */}
-        <input
-          type="number"
-          className="w-full bg-[#242e4c] border border-[#161f3b] p-2"
-          id="costs"
-          ref={numberInputRef}
-          placeholder="částka"
-        />
-      </div>
-      <div className=" overflow-hidden">
-        {/* <label htmlFor="description">popis</label> */}
-        <input
-          type="text"
-          className="w-full bg-[#242e4c] border border-[#161f3b] p-2 "
-          id="description"
-          ref={textInputRef}
-          placeholder="popis"
-        />
-      </div>
+    <div className="w-full  flex flex-col justify-center  border-t-2 border-[#161f3b] p-2 gap-1">
+      <input
+        type="number"
+        className="w-full bg-[#242e4c] border border-[#161f3b] p-2"
+        id="costs"
+        ref={numberInputRef}
+        placeholder="částka"
+      />
+
+      <input
+        type="text"
+        className="w-full bg-[#242e4c] border border-[#161f3b] p-2"
+        id="description"
+        ref={textInputRef}
+        placeholder="popis"
+      />
+
+      <Select
+        onChange={selectTypeHandle}
+        value={selectedType}
+        className="w-full bg-[#242e4c] border border-[#161f3b] p-2"
+      />
       <button
-        className=" text-center capitalize  border-[#161f3b]  "
+        className="w-full flex justify-center border  rounded-b-lg bg-[#161f3b] border-[#161f3b] py-2"
         onClick={getNewExpense}
       >
         <svg

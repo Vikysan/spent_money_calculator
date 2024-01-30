@@ -6,10 +6,10 @@
     scrollbar-color: var(--secondary) var(--primary);
   }
   
-  /* Chrome, Edge, and Safari */
+  /* Chrome, Edge, and Safari
   *::-webkit-scrollbar {
     width: 15px;
-  }
+  } */
   
   *::-webkit-scrollbar-track {
     background: var(--primary);
