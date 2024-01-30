@@ -127,7 +127,7 @@ function App() {
   };
 
   return (
-    <main className="bg-[#161f3b] w-screen h-screen  text-[#9094a3] flex justify-center p-5">
+    <main className="bg-[#161f3b] w-screen h-svh  text-[#9094a3] flex justify-center p-5">
       <div className="w-96 flex flex-col  items-center justify-between bg-[#242e4c] rounded-xl gap-4 pt-3">
         <h2 className="text-3xl">
           {sumExpenses}
