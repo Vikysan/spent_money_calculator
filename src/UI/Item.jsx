@@ -1,10 +1,43 @@
 import React from 'react'
 
 const Item = ({expense, index,removeExpense}) => {
+const {cost,description,type} = expense;
+
+let classes ="flex p-2 rounded-lg bg-[#1c2540] "
+//  switch (type) {
+//   case "Ostatní":
+//         classes+="bg-[#fad1fa]"
+//     break;
+//   case "Potraviny":
+//         classes+="bg-[#faedcb]"
+//     break;
+//   case "Restaurace":
+//         classes+="bg-[#c9e4de]"
+//     break;
+//   case "Oblečení":
+//         classes+="bg-[#f2c6de]"
+//     break;
+//   case "Sport":
+//         classes+="bg-[#dbcdf0]"
+//     break;
+//   case "Spoření":
+//         classes+="bg-[#f1f7b5]"
+//     break;
+//   case "Drogerie":
+//         classes+="bg-[#f7d9c4]"
+//     break;
+ 
+//   default:
+//     break;
+//  }
+
+
+
+
   return (
-    <li className="flex p-2 rounded-lg bg-[#1c2540]" key={"tr" + index}>
-            <p className="w-[8rem]">{expense.cost}</p>
-            <p className="w-2/4">{expense.description}</p>
+    <li className={classes} key={"tr" + index}>
+            <p className="w-[8rem]">{cost}</p>
+            <p className="w-2/4">{description||type}</p>
             <button onClick={() => removeExpense(index)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

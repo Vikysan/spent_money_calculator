@@ -13,7 +13,7 @@ const Select = ({className,onChange,value,...props}) => {
       onChange={onChange}
       value = {value}
     >
-      <option className={"bg-[#fad1fa] p-5" + classes} value="Ostatní">
+      <option className={"bg-[#fad1fa] " + classes} value="Ostatní">
         Ostatní
       </option>
       <option className={"bg-[#faedcb] " + classes} value="Potraviny">
