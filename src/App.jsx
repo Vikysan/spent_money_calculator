@@ -1,99 +1,13 @@
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useRef } from "react";
 import Table from "./components/Table";
 import InputForm from "./components/InputForm";
-
-const dummy = [
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 5000,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 5000,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 5000,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 5000,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-  {
-    cost: 5000,
-    description: "lidl",
-  },
-  {
-    cost: 500,
-    description: "lidl",
-  },
-];
 
 function App() {
   const [expenses, setExpenses] = useState([]);
   const [sumExpenses, setSumExpenses] = useState(0);
+  const tableRef = useRef()
 
+  //check local storage and get date to useState
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem("user"));
     console.log(localData);
@@ -102,6 +16,7 @@ function App() {
     }
   }, []);
 
+  // set Summary every expenses,save to locale storage 
   useEffect(() => {
     const summary = expenses.reduce((acc, cur) => acc + cur.cost, 0);
     setSumExpenses(
@@ -112,8 +27,9 @@ function App() {
         maximumSignificantDigits: 6,
       }).format(summary)
     );
-
     localStorage.setItem("user", JSON.stringify(expenses));
+      //set view to bottom of table
+    tableRef.current.scrollToBottom()
   }, [expenses]);
 
   const addExpense = (newExpends) => {
@@ -133,7 +49,7 @@ function App() {
           {sumExpenses}
         </h2>
 
-        <Table expenses={expenses} removeExpense={removeExpense} />
+        <Table ref={tableRef} expenses={expenses} removeExpense={removeExpense} />
         <InputForm addExpense={addExpense} />
       </div>
     </main>

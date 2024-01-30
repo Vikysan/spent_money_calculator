@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import Select from "./Select";
 
 const InputForm = ({ addExpense }) => {
@@ -13,9 +13,11 @@ const InputForm = ({ addExpense }) => {
       type: selectedType,
       date: new Date(),
     };
-    console.log(newExpense);
-    if (newExpense.cost !== "") {
+    // console.log(newExpense);
+    if (!!newExpense.cost) {
       addExpense(newExpense);
+    }else{
+      numberInputRef.current.focus()
     }
     document.getElementById("costs").value = "";
     document.getElementById("description").value = "";
