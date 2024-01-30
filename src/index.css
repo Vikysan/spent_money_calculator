@@ -2,6 +2,7 @@
 
 /* Firefox */
 * {
+    user-select: none;
     scrollbar-width: thin;
     scrollbar-color: red;
   }

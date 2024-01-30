@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import Select from "./Select";
+import Input from "../UI/Input";
 
 const InputForm = ({ addExpense }) => {
   const numberInputRef = useRef();
@@ -29,17 +30,15 @@ const InputForm = ({ addExpense }) => {
 
   return (
     <div className="w-full  flex flex-col justify-center  border-t-2 border-[#161f3b] p-2 gap-1">
-      <input
+      <Input
         type="number"
-        className="w-full bg-[#242e4c] border border-[#161f3b] p-2 pl-3"
         id="costs"
         ref={numberInputRef}
         placeholder="Částka"
       />
 
-      <input
+      <Input
         type="text"
-        className="w-full bg-[#242e4c] border border-[#161f3b] p-2 pl-3"
         id="description"
         ref={textInputRef}
         placeholder="Popis"
