@@ -29,18 +29,18 @@ const InputForm = ({ addExpense }) => {
     <div className="w-full  flex flex-col justify-center  border-t-2 border-[#161f3b] p-2 gap-1">
       <input
         type="number"
-        className="w-full bg-[#242e4c] border border-[#161f3b] p-2"
+        className="w-full bg-[#242e4c] border border-[#161f3b] p-2 pl-3"
         id="costs"
         ref={numberInputRef}
-        placeholder="částka"
+        placeholder="Částka"
       />
 
       <input
         type="text"
-        className="w-full bg-[#242e4c] border border-[#161f3b] p-2"
+        className="w-full bg-[#242e4c] border border-[#161f3b] p-2 pl-3"
         id="description"
         ref={textInputRef}
-        placeholder="popis"
+        placeholder="Popis"
       />
 
       <Select
@@ -49,7 +49,7 @@ const InputForm = ({ addExpense }) => {
         className="w-full bg-[#242e4c] border border-[#161f3b] p-2"
       />
       <button
-        className="w-full flex justify-center border  rounded-b-lg bg-[#161f3b] border-[#161f3b] py-2"
+        className="w-full flex justify-center border  rounded-b-lg bg-[#161f3b] border-[#161f3b] py-2 mt-4"
         onClick={getNewExpense}
       >
         <svg
