@@ -1,9 +1,12 @@
 import React from 'react'
 
 const Item = ({expense, index,removeExpense}) => {
-const {cost,description,type} = expense;
+const {cost,description,type,date} = expense;
+const [day,month,year] = [date.getDate(),date.getMonth()+1,date.getYear().toString().substring(1)]
 
-let classes ="flex p-2 rounded-lg bg-[#1c2540] "
+
+
+let classes ="flex p-2 rounded-lg bg-[#1c2540] justify-between"
 //  switch (type) {
 //   case "Ostatní":
 //         classes+="bg-[#fad1fa]"
@@ -36,8 +39,9 @@ let classes ="flex p-2 rounded-lg bg-[#1c2540] "
 
   return (
     <li className={classes} key={"tr" + index}>
-            <p className="w-[8rem]">{cost}</p>
-            <p className="w-2/4">{description||type}</p>
+      <p className='w-1/8'>{`${day}.${month}.${year}`}</p>
+            <p className='w-1/4'>{description||type}</p>
+            <p className='w-1/4'>{cost}</p>
             <button onClick={() => removeExpense(index)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
