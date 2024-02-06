@@ -6,7 +6,7 @@ const [day,month,year] = [date.getDate(),date.getMonth()+1,date.getYear().toStri
 
 
 
-let classes ="flex p-2 rounded-lg bg-[#1c2540] justify-between"
+let classes ="flex p-2 rounded-lg bg-[#1c2540] justify-between items-center"
 //  switch (type) {
 //   case "Ostatní":
 //         classes+="bg-[#fad1fa]"
