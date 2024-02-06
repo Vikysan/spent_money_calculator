@@ -1,57 +1,66 @@
-import { useState, useEffect, useRef } from "react";
+import {useEffect, useRef, useReducer } from "react";
 import Table from "./components/Table";
 import InputForm from "./components/InputForm";
 
-function App() {
-  const [expenses, setExpenses] = useState([]);
-  const [sumExpenses, setSumExpenses] = useState(0);
-  const tableRef = useRef()
+const expensesReducer = (state, action) => {
+  let newState = state;
+  if (action.type === "REMOVE") {
+    newState = [...state.filter((_, index) => index !== action.value)];
+    localStorage.setItem("user", JSON.stringify(newState));
+  }
+  if (action.type === "ADD") {
+    newState = [...state, action.value];
+    localStorage.setItem("user", JSON.stringify(newState));
+  }
+  if (action.type === "SET") {
+    newState = [...action.value];
+  }
+  return newState;
+};
 
-  //check local storage and get date to useState
+const localData = JSON.parse(localStorage.getItem("user")) || [];
+
+function App() {
+
+  const [expenses, dispatchExpenses] = useReducer(expensesReducer, []);
+
+  const tableRef = useRef();
+
+  const sum = expenses.reduce((acc, cur) => acc + cur.cost, 0);
+  const sumInCurrencyFormat = Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: 'CZK',
+}).format(sum)
+
+
   useEffect(() => {
-    const localData = JSON.parse(localStorage.getItem("user"));
-    // console.log(localData);
-    if (localData?.length) {
-      setExpenses(localData);
+    if (localData.length) {
+      dispatchExpenses({ type: "SET", value: localData });
     }
   }, []);
 
-  // set Summary every expenses,save to locale storage 
   useEffect(() => {
-    const summary = expenses.reduce((acc, cur) => acc + cur.cost, 0);
-    setSumExpenses(
-      new Intl.NumberFormat("de-DE", {
-        style: "currency",
-        currency: "CZk",
-        unitDisplay: "narrow",
-        maximumSignificantDigits: 6,
-      }).format(summary)
-    );
-    if(expenses.length){
-      localStorage.setItem("user", JSON.stringify(expenses));
-    }
-      //set view to bottom of table
-    tableRef.current.scrollToBottom()
+    tableRef.current.scrollToBottom();
   }, [expenses]);
 
   const addExpense = (newExpends) => {
-    setExpenses((prevExpenses) => [...prevExpenses, newExpends]);
+    dispatchExpenses({ type: "ADD", value: newExpends });
   };
 
   const removeExpense = (id) => {
-    setExpenses((prevExpenses) =>
-      prevExpenses.filter((_, index) => index !== id)
-    );
+    dispatchExpenses({ type: "REMOVE", value: id });
   };
 
   return (
     <main className="bg-[#161f3b] w-screen h-dvh  text-[#9094a3] flex justify-center p-3">
       <div className="w-full min-w-80 md:w-96 flex flex-col  items-center justify-between bg-[#242e4c] rounded-xl gap-4 pt-3">
-        <h2 className="text-3xl">
-          {sumExpenses}
-        </h2>
+        <h2 className="text-3xl">{sumInCurrencyFormat}</h2>
 
-        <Table ref={tableRef} expenses={expenses} removeExpense={removeExpense} />
+        <Table
+          ref={tableRef}
+          expenses={expenses}
+          removeExpense={removeExpense}
+        />
         <InputForm addExpense={addExpense} />
       </div>
     </main>
