@@ -1,4 +1,4 @@
-import { useRef,forwardRef,useImperativeHandle } from "react";
+import { useRef,forwardRef,useImperativeHandle,useEffect} from "react";
 import Item from "../UI/Item";
 
 const Table = forwardRef (({ expenses, removeExpense },ref) => {
@@ -14,13 +14,13 @@ const Table = forwardRef (({ expenses, removeExpense },ref) => {
       // },
     };
   }, []);
-
+    
   return (
     <div className="overflow-y-auto w-full h-full ">
       <ul className="w-full space-y-1 p-2" ref={tableRef}>
         {expenses.map((expense, index) => (
-          <Item expense={expense} index={index} removeExpense={removeExpense}/>
-        ))}
+      <Item expense={expense} index={index} removeExpense={removeExpense} key={index + "item"}/>
+      ))}
       </ul>
     </div>
   );

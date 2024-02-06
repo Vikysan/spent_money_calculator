@@ -10,7 +10,7 @@ function App() {
   //check local storage and get date to useState
   useEffect(() => {
     const localData = JSON.parse(localStorage.getItem("user"));
-    console.log(localData);
+    // console.log(localData);
     if (localData?.length) {
       setExpenses(localData);
     }
@@ -27,7 +27,9 @@ function App() {
         maximumSignificantDigits: 6,
       }).format(summary)
     );
-    localStorage.setItem("user", JSON.stringify(expenses));
+    if(expenses.length){
+      localStorage.setItem("user", JSON.stringify(expenses));
+    }
       //set view to bottom of table
     tableRef.current.scrollToBottom()
   }, [expenses]);

@@ -2,7 +2,8 @@ import React from 'react'
 
 const Item = ({expense, index,removeExpense}) => {
 const {cost,description,type,date} = expense;
-const [day,month,year] = [date.getDate(),date.getMonth()+1,date.getYear().toString().substring(1)]
+const currentDate = new Date(date)
+const [day,month,year] = [currentDate.getDate(),currentDate.getMonth()+1,currentDate.getYear().toString().substring(1)]
 
 
 
@@ -38,10 +39,10 @@ let classes ="flex p-2 rounded-lg bg-[#1c2540] justify-between items-center"
 
 
   return (
-    <li className={classes} key={"tr" + index}>
+    <li className={classes}>
       <p className='w-1/8'>{`${day}.${month}.${year}`}</p>
             <p className='w-1/4'>{description||type}</p>
-            <p className='w-1/4'>{cost}</p>
+            <p className='w-1/5 text-center'>{cost}</p>
             <button onClick={() => removeExpense(index)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
