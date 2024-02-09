@@ -1,6 +1,10 @@
-import React from 'react'
+import {useContext} from 'react'
+import ExpensesContext from '../store/Context';
+
 
 const Item = ({expense, index,removeExpense}) => {
+
+const ctx = useContext(ExpensesContext)
 const {cost,description,type,date} = expense;
 const currentDate = new Date(date)
 const [day,month,year] = [currentDate.getDate(),currentDate.getMonth()+1,currentDate.getYear().toString().substring(1)]
@@ -43,7 +47,7 @@ let classes ="flex p-2 rounded-lg bg-[#1c2540] justify-between items-center"
       <p className='w-1/8'>{`${day}.${month}.${year}`}</p>
             <p className='w-1/4'>{description||type}</p>
             <p className='w-1/5 text-center'>{cost}</p>
-            <button onClick={() => removeExpense(index)}>
+            <button onClick={() => ctx.removeExpense(index)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

@@ -1,8 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef, useState,useContext } from "react";
 import Select from "./Select";
 import Input from "../UI/Input";
+import ExpensesContext from "../store/Context";
 
-const InputForm = ({ addExpense }) => {
+const InputForm = () => {
+  const ctx = useContext(ExpensesContext)
   const numberInputRef = useRef();
   const textInputRef = useRef();
   const [selectedType, setSelectedType] = useState("Ostatní");
@@ -16,7 +18,7 @@ const InputForm = ({ addExpense }) => {
     };
     // console.log(newExpense);
     if (!!newExpense.cost) {
-      addExpense(newExpense);
+      ctx.addExpense(newExpense);
     }else{
       numberInputRef.current.focus()
     }
